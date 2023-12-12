@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bar chart in Chart JS</title>
+    <title>Dynamic Button in Chart JS</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -15,7 +15,7 @@
     <div class="col-8 offset-2 my-5">
       <div class="card">
         <div class="card-body">
-          <h5>Bar Chart in Chart JS</h5>
+          <h5>Dynamic Button in Chart JS</h5>
           <hr />
           <canvas id="myChart"></canvas>
         </div>
@@ -32,22 +32,14 @@
     <script>
       const ctx = document.getElementById("myChart");
 
-      const data1 = [12, 19, 3, 5, 2, 3];
-      const data2 = [9, 12, 6, 10, 4, 7];
-      const alldata = data1.concat(data2);
-
-      const firstmon = ["jan", "feb", "mar", "apr", "may", "jun"];
-      const secondmon = ["jul", "aug", "sep", "oct", "nov", "dec"];
-      const allmon = firstmon.concat(secondmon);
-
       const chart = new Chart(ctx, {
         type: "bar",
         data: {
-          labels: allmon,
+          labels: ["jan", "feb", "mar", "apr", "may", "jun"],
           datasets: [
             {
               label: "My First Dataset",
-              data: alldata,
+              data: ["jan", "feb", "mar", "apr", "may", "jun"],
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(255, 159, 64, 0.2)",
