@@ -22,7 +22,7 @@
     const ctx = document.getElementById('myChart');
 
     const chart = new Chart(ctx, {
-        type: 'scatter',
+        type: 'bar',
         data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [
@@ -42,11 +42,14 @@
                 borderWidth: 2
             }],
         options: {
-        scales: {
-            y: {
-            beginAtZero: true
-            }
-        }
+            scales: {
+                y: {
+                beginAtZero: true
+                }
+            },
+            legend: {
+                display: false,
+            },
         }
     }});
 
