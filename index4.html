@@ -11,13 +11,16 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
+  <body class="bg-success">
     <div class="col-8 offset-2 my-5">
       <div class="card">
         <div class="card-body">
           <h5>Dynamic Button in Chart JS</h5>
           <hr />
           <canvas id="myChart"></canvas>
+          <hr />
+          <button id="line" class="btn btn-success">Line Chart</button>
+          <button id="bar" class="btn btn-info">Bar Chart</button>
         </div>
       </div>
     </div>
@@ -28,18 +31,33 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
     <script>
-      const ctx = document.getElementById("myChart");
+      const line = document.getElementById("line");
+      const bar = document.getElementById("bar");
 
+      line.addEventListener("click", lineChart);
+      bar.addEventListener("click", barChart);
+
+      function lineChart() {
+        chart.config.type = "line";
+        chart.update();
+      }
+
+      function barChart() {
+        chart.config.type = "bar";
+        chart.update();
+      }
+
+      const ctx = document.getElementById("myChart");
       const chart = new Chart(ctx, {
         type: "bar",
         data: {
           labels: ["jan", "feb", "mar", "apr", "may", "jun"],
           datasets: [
             {
-              label: "My First Dataset",
-              data: ["jan", "feb", "mar", "apr", "may", "jun"],
+              label: "Months",
+              data: [48, 54, 24, 76, 65, 36],
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(255, 159, 64, 0.2)",
@@ -65,6 +83,7 @@
                 beginAtZero: true,
               },
             },
+
             legend: {
               display: false,
             },
