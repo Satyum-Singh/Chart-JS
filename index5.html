@@ -58,14 +58,14 @@
               <!-- Column 5 -->
               <div class="col">
                 <div id="value5" class="card">
-                  <div id="value55" class="card-body">!</div>
+                  <div id="value55" class="card-body">5</div>
                 </div>
               </div>
 
               <!-- Column 6 -->
               <div class="col">
                 <div id="value6" class="card">
-                  <div id="value66" class="card-body">!</div>
+                  <div id="value66" class="card-body">6</div>
                 </div>
               </div>
             </div>
@@ -109,11 +109,11 @@
       const chart = new Chart(ctx, {
         type: "bar",
         data: {
-          labels: ["jan", "feb", "mar", "apr", "may", "jun"],
+          labels: ["Red", "Orange", "Yellow", "Cyan", "Blue", "Purple"],
           datasets: [
             {
               label: "Months",
-              data: [48, 54, 24, 76, 65, 36],
+              data: [48, 54, 55, 76, 65, 36],
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(255, 159, 64, 0.2)",
@@ -153,7 +153,20 @@
       value4.style.backgroundColor = cyan;
       value5.style.backgroundColor = blue;
       value6.style.backgroundColor = purple;
+
+      document.getElementById("value11").innerText =
+        chart.data.labels[0] + " : " + chart.data.datasets[0].data[0];
+      document.getElementById("value22").innerText =
+        chart.data.labels[1] + " : " + chart.data.datasets[0].data[1];
+      document.getElementById("value33").innerText =
+        chart.data.labels[2] + " : " + chart.data.datasets[0].data[2];
+      document.getElementById("value44").innerText =
+        chart.data.labels[3] + " : " + chart.data.datasets[0].data[3];
+      document.getElementById("value55").innerText =
+        chart.data.labels[4] + " : " + chart.data.datasets[0].data[4];
+      document.getElementById("value66").innerText =
+        chart.data.labels[5] + " : " + chart.data.datasets[0].data[5];
     </script>
-    <script src="server.js"></script>
+    <!-- <script src="server.js"></script> -->
   </body>
 </html>
