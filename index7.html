@@ -10,14 +10,38 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      .chartCard {
+        width: 100vw;
+        height: calc(100vh - 40px);
+        background: rgba(54, 162, 235, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .chartBox {
+        width: 1000px;
+        padding: 20px;
+        border-radius: 20px;
+        border: solid 3px rgba(54, 162, 235, 1);
+        background: white;
+      }
+    </style>
   </head>
-  <body class="bg-success">
-    <div class="col-5 offset-2 my-5">
-      <div id="changebg" class="card">
-        <div class="card-body">
+  <body>
+    <div>
+      <div class="chartCard">
+        <div class="chartBox">
           <h4>Tests Source</h4>
           <hr />
           <canvas id="myChart"></canvas>
+          <div id="legend-container"></div>
         </div>
       </div>
     </div>
@@ -38,28 +62,100 @@
       const dark_red = "#D31027";
       const light_red = "#EA384D";
 
-      const ctx = document.getElementById("myChart");
-      const chart = new Chart(ctx, {
+      //   const getOrCreateLegendList = (chart, id) => {
+      //     const legendContainer = document.getElementById(id);
+      //     let listContainer = legendContainer.querySelector("ul");
+      //     if (!listContainer) {
+      //       listContainer = document.createElement("ul");
+      //       listContainer.style.display = "flex";
+      //       listContainer.style.flexDirection = "row";
+      //       listContainer.style.margin = 0;
+      //       listContainer.style.padding = 0;
+      //       listContainer.className = "listContainer";
+
+      //       legendContainer.appendChild(listContainer);
+      //     }
+      //     return listContainer;
+      //   };
+
+      const data = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        datasets: [
+          {
+            label: "Stock Closing Price",
+            data: [58, 33, 8, 12, 44, 22],
+            backgroundColor: [
+              light_green,
+              yellow,
+              light_red,
+              light_green,
+              yellow,
+              light_red,
+            ],
+            borderWidth: 1,
+            hoverOffset: 20,
+          },
+        ],
+      };
+
+      //   const htmlLegendPlugin = {
+      //     id: "htmlLegend",
+      //     afterUpdate(chart, args, options) {
+      //       const ul = getOrCreateLegendList(chart, options.containerID);
+      //       while (ul.firstChild) ul.removeChild(ul.firstChild);
+      //       const items =
+      //         chart.options.plugins.legend.labels.generateLabels(chart);
+      //       items.forEach((item) => {
+      //         const li = document.createElement("li");
+      //         li.className = "li";
+
+      //         const boxSpan = document.createElement("span");
+      //         boxSpan.className = "boxSpan";
+
+      //         const textContainer = document.createElement("p");
+      //         textContainer.className = "textContainer";
+
+      //         li.appendChild(boxSpan);
+      //         li.appendChild(textContainer);
+
+      //         ul.appendChild(li);
+      //       });
+      //     },
+      //   };
+
+      const doughnutLabel = {
+        id: "doughnutLabel",
+        beforeDatasetsDraw(chart, args, pluginOptions) {
+          const { ctx, data } = chart;
+          ctx.save();
+          const xCoor = chart.getDatasetMeta(0).data[0].x;
+          const yCoor = chart.getDatasetMeta(0).data[0].y;
+          ctx.font = "bold 20px Arial";
+          ctx.fillStyle = "black";
+          ctx.fillText("Hola", xCoor, yCoor);
+        },
+      };
+
+      const config = {
         type: "doughnut",
-        data: {
-          labels: ["Jan", "Feb", "Mar"],
-          datasets: [
-            {
-              label: "Stock Closing Price",
-              data: [58, 33, 8],
-              backgroundColor: [light_green, yellow, light_red],
-              borderWidth: 2,
+        data,
+        options: {
+          layout: {
+            padding: 50,
+          },
+          plugins: {
+            legend: {
+              display: false,
             },
-          ],
-          options: {
-            plugins: {
-              legend: {
-                display: true,
-              },
-            },
+            // htmlPlugin: {
+            //   containerID: "legend-container",
+            // },
           },
         },
-      });
+        plugins: [doughnutLabel],
+      };
+
+      const myChart = new Chart(document.getElementById("myChart"), config);
     </script>
   </body>
 </html>
